@@ -219,9 +219,6 @@ func NewCmdExtension(f *cmdutil.Factory) *cobra.Command {
 					tp.HeaderRow("", "REPO", "DESCRIPTION")
 
 					for _, repo := range result.Items {
-						if !strings.HasPrefix(repo.Name, "gh-") {
-							continue
-						}
 
 						installed := ""
 						if isInstalled(repo) {
@@ -247,7 +244,7 @@ func NewCmdExtension(f *cmdutil.Factory) *cobra.Command {
 			cmdutil.AddJSONFlags(cmd, &exporter, search.RepositoryFields)
 
 			// Query parameter flags
-			cmd.Flags().IntVarP(&query.Limit, "limit", "L", 32, "Maximum number of extensions to fetch")
+			cmd.Flags().IntVarP(&query.Limit, "limit", "L", 30, "Maximum number of extensions to fetch")
 			cmdutil.StringEnumFlag(cmd, &order, "order", "", "desc", []string{"asc", "desc"}, "Order of repositories returned, ignored unless '--sort' flag is specified")
 			cmdutil.StringEnumFlag(cmd, &sort, "sort", "", "best-match", []string{"forks", "help-wanted-issues", "stars", "updated"}, "Sort fetched repositories")
 
